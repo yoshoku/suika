@@ -1,5 +1,9 @@
 # Suika
 
+[![Gem Version](https://badge.fury.io/rb/suika.svg)](https://badge.fury.io/rb/suika)
+[![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/suika/blob/master/LICENSE.txt)
+[![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://rubydoc.info/gems/suika)
+
 Suika is a Japanese morphological analyzer written in pure Ruby.
 
 ## Installation
@@ -56,7 +60,8 @@ This project is intended to be a safe, welcoming space for collaboration, and co
 
 The gem is available as open source under the terms of the [BSD-3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
 In addition, the gem includes binary data generated from mecab-ipadic.
-The details of the license can be found in LICENSE.txt and NOTICE.txt.
+The details of the license can be found in [LICENSE.txt](https://github.com/yoshoku/suika/blob/master/LICENSE.txt)
+and [NOTICE.txt](https://github.com/yoshoku/suika/blob/master/NOTICE.txt).
 
 ## Respect
 
