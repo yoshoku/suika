@@ -4,6 +4,8 @@ require 'rambling-trie'
 require 'zlib'
 
 module Suika
+  # Tagger is a class that tokenizes Japanese text.
+  #
   # @example
   #   require 'suika'
   #
@@ -19,6 +21,7 @@ module Suika
   #   # うち    名詞, 非自立, 副詞可能, *, *, *, うち, ウチ, ウチ
   #
   class Tagger
+    # Create a new tagger by loading the built-in binary dictionary.
     def initialize
       ipadic = Marshal.load(Zlib::GzipReader.open(__dir__ + '/../../dict/ipadic.gz', &:read))
       @trie = ipadic[:trie]
@@ -27,6 +30,9 @@ module Suika
       @cost_mat = ipadic[:cost_matrix]
     end
 
+    # Parse the given sentence.
+    # @param sentence [String] Japanese text to be parsed.
+    # @return [Array<String>]
     def parse(sentence)
       lattice = Lattice.new(sentence.length)
       start = 0
