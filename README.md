@@ -24,9 +24,7 @@ Or install it yourself as:
 require 'suika'
 
 tagger = Suika::Tagger.new
-tagger.parse('すもももももももものうち').each do |token|
-  puts token
-end
+tagger.parse('すもももももももものうち').each { |token| puts token }
 
 # すもも  名詞, 一般, *, *, *, *, すもも, スモモ, スモモ
 # も      助詞, 係助詞, *, *, *, *, も, モ, モ
@@ -37,11 +35,17 @@ end
 # うち    名詞, 非自立, 副詞可能, *, *, *, うち, ウチ, ウチ
 ```
 
-## Development
+Since the Tagger class loads the binary dictionary at initialization, it is recommended to reuse the instance.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+tagger = Suika::Tagger.new
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+sentences.each do |sentence|
+  result = tagger.parse(sentence)
+
+  # ...
+end
+```
 
 ## Contributing
 
@@ -51,6 +55,17 @@ This project is intended to be a safe, welcoming space for collaboration, and co
 ## License
 
 The gem is available as open source under the terms of the [BSD-3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
+In addition, the gem includes binary data generated from mecab-ipadic.
+The details of the license can be found in LICENSE.txt and NOTICE.txt.
+
+## Respect
+
+- [Taku Kudo](https://github.com/taku910) is the author of [MeCab](https://taku910.github.io/mecab/) that is the most famous morphological analyzer in Japan.
+MeCab is one of the great software in natural language processing.
+Suika is created with reference to [the book on morphological analysis](https://www.kindaikagaku.co.jp/information/kd0577.htm) written by Dr. Kudo.
+- [Tomoko Uchida](https://github.com/mocobeta) is the author of [Janome](https://github.com/mocobeta/janome) that is a Japanese morphological analysis engine written in pure Python.
+Suika is heavily influenced by Janome's idea to include the built-in dictionary and language model.
+Janome, a morphological analyzer written in scripting language, gives me the courage to develop Suika.
 
 ## Code of Conduct
 
