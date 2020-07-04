@@ -4,7 +4,7 @@
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/suika/blob/master/LICENSE.txt)
 [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://rubydoc.info/gems/suika)
 
-Suika is a Japanese morphological analyzer written in pure Ruby.
+Suika 🍉 is a Japanese morphological analyzer written in pure Ruby.
 
 ## Installation
 
