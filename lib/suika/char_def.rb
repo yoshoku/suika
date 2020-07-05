@@ -7,7 +7,7 @@ module Suika
     def self.char_type(ch)
       code = ch.unpack1('U*')
       CHAR_TYPES.find do |ctype|
-        Object.const_get("CharDef::#{ctype}").any? { |r| r.include?(code) }
+        Object.const_get("::Suika::CharDef::#{ctype}").any? { |r| r.include?(code) }
       end
     end
 
