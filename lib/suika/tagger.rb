@@ -41,41 +41,37 @@ module Suika
       while start < terminal
         word = sentence[start]
         pos = start
-        is_unknown = true
+        matched = false
         while @trie.match?(word) && pos < terminal
           if @dictionary.key?(word)
+            matched = true
             @dictionary[word].each do |el|
-              lattice.insert(start, start + word.length,
-                             word, el[0].to_i, el[1].to_i, el[2].to_i,
-                             el[3..-1])
+              lattice.insert(start, start + word.length, word, false,
+                             el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
             end
-            is_unknown = false
           end
           pos += 1
           word = sentence[start..pos]
         end
 
-        unless is_unknown
-          start += 1
-          next
-        end
-
         word = sentence[start]
-        char_type = CharDef.char_type(sentence[start])
         char_cate = CharDef.char_category(sentence[start])
-        if char_cate[:group] == 1
-          unk_terminal = char_cate[:length].zero? ? terminal : start + char_cate[:length]
-          pos = start + 1
-          while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
-            word << sentence[pos]
-            pos += 1
+        unless !char_cate[:invoke] && matched
+          if char_cate[:group]
+            char_type = CharDef.char_type(sentence[start])
+            unk_terminal = char_cate[:length].zero? ? terminal : [start + char_cate[:length], terminal].min
+            pos = start + 1
+            while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
+              word << sentence[pos]
+              pos += 1
+            end
+          end
+          @unknown_dictionary[char_type].each do |el|
+            lattice.insert(start, start + word.length, word, true,
+                           el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
           end
         end
-        @unknown_dictionary[char_type].each do |el|
-          lattice.insert(start, start + word.length,
-                         word, el[0].to_i, el[1].to_i, el[2].to_i,
-                         el[3..-1])
-        end
+
         start += 1
       end
 
@@ -114,6 +110,7 @@ module Suika
         res.append("#{prev_node.surface}\t#{prev_node.attrs.join(', ')}") if prev_node.surface != 'BOS' && prev_node.surface != 'EOS'
         prev_node = prev_node.min_prev
       end
+
       res.reverse
     end
   end
