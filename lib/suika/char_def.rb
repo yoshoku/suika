@@ -18,37 +18,37 @@ module Suika
 
     CHAR_CATEGORY = {
       'DEFAULT' => {
-        invoke: 0, group: 1, length: 0
+        invoke: false, group: true, length: 0
       },
       'SPACE' => {
-        invoke: 0, group: 1, length: 0
+        invoke: false, group: true, length: 0
       },
       'KANJI' => {
-        invoke: 0, group: 0, length: 2
+        invoke: false, group: false, length: 2
       },
       'SYMBOL' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       },
       'NUMERIC' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       },
       'ALPHA' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       },
       'HIRAGANA' => {
-        invoke: 0, group: 1, length: 2
+        invoke: false, group: true, length: 2
       },
       'KATAKANA' => {
-        invoke: 1, group: 1, length: 2
+        invoke: true, group: true, length: 2
       },
       'KANJINUMERIC' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       },
       'GREEK' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       },
       'CYRILLIC' => {
-        invoke: 1, group: 1, length: 0
+        invoke: true, group: true, length: 0
       }
     }.freeze
 
