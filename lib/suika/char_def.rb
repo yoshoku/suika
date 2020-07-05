@@ -171,8 +171,6 @@ module Suika
       0xF900..0xFA2D,
       0xFA30..0xFA6A
     ].freeze
-
-    # rubocop:disable Style/AsciiComments
     # KANJI-NUMERIC （一 二 三 四 五 六 七 八 九 十 百 千 万 億 兆）
     # 0x4E00 KANJINUMERIC KANJI
     KANJINUMERIC = [
@@ -192,7 +190,6 @@ module Suika
       0x5104..0x5104,
       0x5146..0x5146
     ].freeze
-    # rubocop:enable Style/AsciiComments
 
     private_constant :CHAR_CATEGORY, :CHAR_TYPES
 
