@@ -66,8 +66,8 @@ module Suika
         if char_cate[:group] == 1
           unk_terminal = char_cate[:length].zero? ? terminal : start + char_cate[:length]
           pos = start + 1
-          while pos < unk_terminal && char_type == CharDef.char_type(text[t])
-            word << text[t]
+          while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
+            word << sentence[pos]
             pos += 1
           end
         end
