@@ -1,3 +1,7 @@
+# 0.1.3
+- Fix unknown word processing.
+- Remove redundant spaces from output.
+
 # 0.1.2
 - Fix local variable typo in Tagger.parse.
 
