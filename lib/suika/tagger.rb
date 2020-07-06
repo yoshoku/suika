@@ -57,14 +57,13 @@ module Suika
         word = sentence[start]
         char_cate = CharDef.char_category(sentence[start])
         unless !char_cate[:invoke] && matched
-          if char_cate[:group]
-            char_type = CharDef.char_type(sentence[start])
-            unk_terminal = char_cate[:length].zero? ? terminal : [start + char_cate[:length], terminal].min
-            pos = start + 1
-            while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
-              word << sentence[pos]
-              pos += 1
-            end
+          char_length = char_cate[:group] ? CharDef::MAX_GROUPING_SIZE : char_cate[:length]
+          unk_terminal = [start + char_length, terminal].min
+          pos = start + 1
+          char_type = CharDef.char_type(sentence[start])
+          while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
+            word << sentence[pos]
+            pos += 1
           end
           @unknown_dictionary[char_type].each do |el|
             lattice.insert(start, start + word.length, word, true,

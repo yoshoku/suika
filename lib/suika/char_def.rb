@@ -16,6 +16,8 @@ module Suika
       CHAR_CATEGORY[char_type(ch)]
     end
 
+    MAX_GROUPING_SIZE = 24
+
     CHAR_CATEGORY = {
       'DEFAULT' => {
         invoke: false, group: true, length: 0
