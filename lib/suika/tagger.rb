@@ -12,13 +12,13 @@ module Suika
   #   tagger = Suika::Tagger.new
   #   tagger.parse('すもももももももものうち').each { |token| puts token }
   #
-  #   # すもも  名詞, 一般, *, *, *, *, すもも, スモモ, スモモ
-  #   # も      助詞, 係助詞, *, *, *, *, も, モ, モ
-  #   # もも    名詞, 一般, *, *, *, *, もも, モモ, モモ
-  #   # も      助詞, 係助詞, *, *, *, *, も, モ, モ
-  #   # もも    名詞, 一般, *, *, *, *, もも, モモ, モモ
-  #   # の      助詞, 連体化, *, *, *, *, の, ノ, ノ
-  #   # うち    名詞, 非自立, 副詞可能, *, *, *, うち, ウチ, ウチ
+  #   # すもも  名詞,一般,*,*,*,*,すもも,スモモ,スモモ
+  #   # も      助詞,係助詞,*,*,*,*,も,モ,モ
+  #   # もも    名詞,一般,*,*,*,*,もも,モモ,モモ
+  #   # も      助詞,係助詞,*,*,*,*,も,モ,モ
+  #   # もも    名詞,一般,*,*,*,*,もも,モモ,モモ
+  #   # の      助詞,連体化,*,*,*,*,の,ノ,ノ
+  #   # うち    名詞,非自立,副詞可能,*,*,*,うち,ウチ,ウチ
   #
   class Tagger
     # Create a new tagger by loading the built-in binary dictionary.
@@ -106,7 +106,7 @@ module Suika
       prev_node = eos.min_prev
       res = []
       until prev_node.nil?
-        res.append("#{prev_node.surface}\t#{prev_node.attrs.join(', ')}") if prev_node.surface != 'BOS' && prev_node.surface != 'EOS'
+        res.append("#{prev_node.surface}\t#{prev_node.attrs.join(',')}") if prev_node.surface != 'BOS' && prev_node.surface != 'EOS'
         prev_node = prev_node.min_prev
       end
 
