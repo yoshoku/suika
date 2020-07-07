@@ -5,10 +5,11 @@ module Suika
   class CharDef
     # @!visibility private
     def self.char_type(ch)
-      code = ch.unpack1('U*')
-      CHAR_TYPES.find do |ctype|
-        Object.const_get("::Suika::CharDef::#{ctype}").any? { |r| r.include?(code) }
+      ch_code = ch.unpack1('U*')
+      ch_type = CHAR_TYPES.find do |ct|
+        Object.const_get("::Suika::CharDef::#{ct}").any? { |r| r.include?(ch_code) }
       end
+      ch_type || 'DEFAULT'
     end
 
     # @!visibility private
