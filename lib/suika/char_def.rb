@@ -120,6 +120,7 @@ module Suika
       0x2B00..0x2BFF,  # Miscellaneous Symbols and Arrows
       0x2A00..0x2AFF,  # Supplemental Mathematical Operators
       0x3300..0x33FF,
+      0x32FF..0x32FF,  # Square era name REIWA
       0x3200..0x32FE,  # ENclosed CJK Letters and Months
       0x3000..0x303F,  # CJK Symbol and Punctuation
       0xFE30..0xFE4F,  # CJK Compatibility Forms
