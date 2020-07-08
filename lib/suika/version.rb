@@ -3,5 +3,5 @@
 # Suika is a Japanese morphological analyzer written in pure Ruby.
 module Suika
   # The version of Suika you are using.
-  VERSION = '0.1.3'
+  VERSION = '0.1.4'
 end

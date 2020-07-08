@@ -1,3 +1,11 @@
+## 0.1.4
+
+### Bug Fixes
+- Fix CharDef.char_type to return 'DEFAULT' when unknown character code is given.
+
+### Features
+- Add character code of square era name Reiwa.
+
 ## 0.1.3
 
 ### Bug Fixes
