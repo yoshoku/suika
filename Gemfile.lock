@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    suika (0.1.2)
+    suika (0.1.4)
       rambling-trie (~> 2.1)
 
 GEM
