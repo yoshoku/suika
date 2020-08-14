@@ -52,6 +52,25 @@ sentences.each do |sentence|
 end
 ```
 
+## Test
+Suika was able to parse all sentences in the [Livedoor news corpus](https://www.rondhuit.com/download.html#ldcc)
+without any error.
+
+```ruby
+require 'suika'
+
+tagger = Suika::Tagger.new
+
+Dir.glob('ldcc-20140209/text/*/*.txt').each do |filename|
+  File.foreach(filename) do |sentence|
+    sentence.strip!
+    puts tagger.parse(sentence) unless sentence.empty?
+  end
+end
+```
+
+![suika_test](https://user-images.githubusercontent.com/5562409/90264778-8f593f80-de8c-11ea-81f1-20831e3c8b12.gif)
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/yoshoku/suika.
