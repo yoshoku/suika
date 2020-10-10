@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    suika (0.1.4)
+    suika (0.2.0)
       dartsclone (>= 0.2.0)
 
 GEM

@@ -1,3 +1,9 @@
+## 0.2.0
+
+### Breaking Change
+- Change to use dartsclone for trie library.
+
+
 ## 0.1.4
 
 ### Bug Fixes
