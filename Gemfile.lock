@@ -2,14 +2,14 @@ PATH
   remote: .
   specs:
     suika (0.1.4)
-      rambling-trie (~> 2.1)
+      dartsclone (>= 0.2.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    dartsclone (0.2.0)
     diff-lcs (1.4.4)
     rake (12.3.3)
-    rambling-trie (2.1.1)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
