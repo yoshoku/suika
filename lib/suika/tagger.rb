@@ -24,7 +24,11 @@ module Suika
   class Tagger
     # Create a new tagger by loading the built-in binary dictionary.
     def initialize
-      load_dictionary
+      raise IOError, 'SHA1 digest of dictionary file does not match.' unless DICTIONARY_KEY == Digest::SHA1.file(DICTIONARY_PATH).to_s
+
+      @sysdic = Marshal.load(Zlib::GzipReader.open(DICTIONARY_PATH, &:read))
+      @trie = DartsClone::DoubleArray.new
+      @trie.set_array(@sysdic[:trie])
     end
 
     # Parse the given sentence.
@@ -39,11 +43,11 @@ module Suika
         step = terminal - start
 
         query = sentence[start..-1]
-        result = @trie.common_prefix_search(query)
+        result = trie.common_prefix_search(query)
         unless result.empty?
-          words, values = result
+          words, indices = result
           words.each_with_index do |word, i|
-            @dictionary[values[i]].each do |el|
+            features[indices[i]].each do |el|
               lattice.insert(start, start + word.length, word, false,
                              el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
             end
@@ -63,7 +67,7 @@ module Suika
             pos += 1
           end
         end
-        @unknown_dictionary[char_type].each do |el|
+        unknowns[char_type].each do |el|
           lattice.insert(start, start + word.length, word, true,
                          el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
         end
@@ -83,15 +87,18 @@ module Suika
 
     private_constant :DICTIONARY_PATH, :DICTIONARY_KEY, :INT_MAX
 
-    def load_dictionary
-      raise IOError, 'SHA1 digest of dictionary file does not match.' unless DICTIONARY_KEY == Digest::SHA1.file(DICTIONARY_PATH).to_s
+    attr_reader :trie
 
-      sysdic = Marshal.load(Zlib::GzipReader.open(DICTIONARY_PATH, &:read))
-      @dictionary = sysdic[:dictionary]
-      @unknown_dictionary = sysdic[:unknown_dictionary]
-      @cost_mat = sysdic[:cost_matrix]
-      @trie = DartsClone::DoubleArray.new
-      @trie.set_array(sysdic[:trie])
+    def features
+      @sysdic[:dictionary]
+    end
+
+    def unknowns
+      @sysdic[:unknown_dictionary]
+    end
+
+    def costmat
+      @sysdic[:cost_matrix]
     end
 
     def viterbi(lattice)
@@ -104,7 +111,7 @@ module Suika
           rnode.min_cost = INT_MAX
           rnode.min_prev = nil
           lattice.end_nodes[n].each do |lnode|
-            cost = lnode.min_cost + @cost_mat[lnode.right_id][rnode.left_id] + rnode.cost
+            cost = lnode.min_cost + costmat[lnode.right_id][rnode.left_id] + rnode.cost
             if cost < rnode.min_cost
               rnode.min_cost = cost
               rnode.min_prev = lnode
