@@ -36,39 +36,40 @@ module Suika
       terminal = sentence.length
 
       while start < terminal
-        word = sentence[start]
-        pos = start
-        matched = false
-        while @trie.match?(word) && pos < terminal
-          if @dictionary.key?(word)
-            matched = true
-            @dictionary[word].each do |el|
+        step = terminal - start
+
+        query = sentence[start..-1]
+        result = @trie.common_prefix_search(query)
+        unless result.empty?
+          words, values = result
+          words.each_with_index do |word, i|
+            @dictionary[values[i]].each do |el|
               lattice.insert(start, start + word.length, word, false,
                              el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
             end
           end
-          pos += 1
-          word = sentence[start..pos]
+          step = words.map(&:size).min
         end
 
         word = sentence[start]
         char_cate = CharDef.char_category(sentence[start])
-        unless !char_cate[:invoke] && matched
+        char_type = CharDef.char_type(sentence[start])
+        if char_cate[:invoke]
           char_length = char_cate[:group] ? CharDef::MAX_GROUPING_SIZE : char_cate[:length]
           unk_terminal = [start + char_length, terminal].min
           pos = start + 1
-          char_type = CharDef.char_type(sentence[start])
           while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
             word << sentence[pos]
             pos += 1
           end
-          @unknown_dictionary[char_type].each do |el|
-            lattice.insert(start, start + word.length, word, true,
-                           el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
-          end
         end
+        @unknown_dictionary[char_type].each do |el|
+          lattice.insert(start, start + word.length, word, true,
+                         el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
+        end
+        step = [step, word.length].min
 
-        start += 1
+        start += step
       end
 
       viterbi(lattice)
