@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'rambling-trie'
+require 'dartsclone'
+require 'rubygems/package'
 require 'zlib'
 
 module Suika
@@ -23,11 +24,7 @@ module Suika
   class Tagger
     # Create a new tagger by loading the built-in binary dictionary.
     def initialize
-      ipadic = Marshal.load(Zlib::GzipReader.open(__dir__ + '/../../dict/ipadic.gz', &:read))
-      @trie = ipadic[:trie]
-      @dictionary = ipadic[:dictionary]
-      @unknown_dictionary = ipadic[:unknown_dictionary]
-      @cost_mat = ipadic[:cost_matrix]
+      load_dictionary
     end
 
     # Parse the given sentence.
@@ -79,9 +76,22 @@ module Suika
 
     private
 
+    DICTIONARY_PATH = "#{__dir__}/../../dict/sysdic.gz"
+    DICTIONARY_KEY = '562e53853b8a5b9f4857536b0748847a0878ebf0'
     INT_MAX = 2**(([42].pack('i').size * 16) - 2) - 1
 
-    private_constant :INT_MAX
+    private_constant :DICTIONARY_PATH, :DICTIONARY_KEY, :INT_MAX
+
+    def load_dictionary
+      raise IOError, 'SHA1 digest of dictionary file does not match.' unless DICTIONARY_KEY == Digest::SHA1.file(DICTIONARY_PATH).to_s
+
+      sysdic = Marshal.load(Zlib::GzipReader.open(DICTIONARY_PATH, &:read))
+      @dictionary = sysdic[:dictionary]
+      @unknown_dictionary = sysdic[:unknown_dictionary]
+      @cost_mat = sysdic[:cost_matrix]
+      @trie = DartsClone::DoubleArray.new
+      @trie.set_array(sysdic[:trie])
+    end
 
     def viterbi(lattice)
       bos = lattice.end_nodes[0].first
