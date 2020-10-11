@@ -4,8 +4,6 @@ module Suika
   # @!visibility private
   class Lattice
     # @!visibility private
-    Node = Struct.new(:surface, :unknown, :min_cost, :min_prev, :left_id, :right_id, :cost, :attrs, keyword_init: true)
-
     attr_reader :begin_nodes, :end_nodes, :length
 
     # @!visibility private
