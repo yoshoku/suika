@@ -124,7 +124,7 @@ module Suika
       prev_node = eos.min_prev
       res = []
       until prev_node.nil?
-        res.append("#{prev_node.surface}\t#{prev_node.attrs.join(',')}") if prev_node.surface != 'BOS' && prev_node.surface != 'EOS'
+        res.push("#{prev_node.surface}\t#{prev_node.attrs.join(',')}") if prev_node.surface != 'BOS' && prev_node.surface != 'EOS'
         prev_node = prev_node.min_prev
       end
 
