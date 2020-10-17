@@ -81,7 +81,7 @@ module Suika
     private
 
     DICTIONARY_PATH = "#{__dir__}/../../dict/sysdic.gz"
-    DICTIONARY_KEY = '562e53853b8a5b9f4857536b0748847a0878ebf0'
+    DICTIONARY_KEY = 'eb921bf5e67f5733188527b21adbf9dabdda0c7a'
     INT_MAX = 2**(([42].pack('i').size * 16) - 2) - 1
 
     private_constant :DICTIONARY_PATH, :DICTIONARY_KEY, :INT_MAX
@@ -89,15 +89,15 @@ module Suika
     attr_reader :trie
 
     def features
-      @sysdic[:dictionary]
+      @sysdic[:features]
     end
 
     def unknowns
-      @sysdic[:unknown_dictionary]
+      @sysdic[:unknowns]
     end
 
-    def costmat
-      @sysdic[:cost_matrix]
+    def connect_cost(r_id, l_id)
+      @sysdic[:concosts][r_id][l_id]
     end
 
     def viterbi(lattice)
@@ -110,7 +110,7 @@ module Suika
           rnode.min_cost = INT_MAX
           rnode.min_prev = nil
           lattice.end_nodes[n].each do |lnode|
-            cost = lnode.min_cost + costmat[lnode.right_id][rnode.left_id] + rnode.cost
+            cost = lnode.min_cost + connect_cost(lnode.right_id, rnode.left_id) + rnode.cost
             if cost < rnode.min_cost
               rnode.min_cost = cost
               rnode.min_prev = lnode
