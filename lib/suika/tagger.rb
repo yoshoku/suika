@@ -48,8 +48,7 @@ module Suika
           words, indices = result
           words.each_with_index do |word, i|
             features[indices[i]].each do |el|
-              lattice.insert(start, start + word.length, word, false,
-                             el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
+              lattice.insert(start, start + word.length, word, false, el[0], el[1], el[2], el[3..-1])
             end
           end
           step = words.map(&:size).min
