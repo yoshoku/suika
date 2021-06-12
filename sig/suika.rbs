@@ -1,0 +1,3 @@
+module Suika
+  VERSION: String
+end

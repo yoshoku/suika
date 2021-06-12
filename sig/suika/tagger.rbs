@@ -1,0 +1,23 @@
+module Suika
+  class Tagger
+    def initialize: () -> void
+    def parse: (String sentence) -> Array[String]
+
+    private
+
+    DICTIONARY_PATH: String
+    DICTIONARY_KEY: String
+    INT_MAX: untyped
+
+    attr_reader trie: ::DartsClone::DoubleArray
+
+    # type feature = [Integer, Integer, Integer, String, String, String, String, String, String, String]
+
+    # def features: () -> Array[Array[feature]]
+    def features: () -> Array[Array[untyped]]
+    # def unknowns: () -> Hash[String, Array[feature]]
+    def unknowns: () -> Hash[String, Array[untyped]]
+    def connect_cost: (Integer r_id, Integer l_id) -> Integer
+    def viterbi: (::Suika::Lattice lattice) -> Array[String]
+  end
+end

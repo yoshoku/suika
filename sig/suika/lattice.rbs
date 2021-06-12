@@ -1,0 +1,11 @@
+module Suika
+  class Lattice
+    attr_reader begin_nodes: Array[Array[::Suika::Node]]
+    attr_reader end_nodes: Array[Array[::Suika::Node]]
+    attr_reader length: Integer
+
+    def initialize: (Integer length) -> void
+    def insert: (Integer begin_id, Integer end_id, String surface, bool unknown,
+                 Integer left_id, Integer right_id, Integer cost, Array[String] attrs) -> void
+  end
+end

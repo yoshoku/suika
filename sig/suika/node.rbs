@@ -1,0 +1,18 @@
+module Suika
+  class Node
+    attr_accessor surface: String
+    attr_accessor unknown: bool
+    attr_accessor min_cost: Integer
+    # attr_accessor min_prev: ::Suika::Node?
+    attr_accessor min_prev: untyped
+    attr_accessor left_id: Integer
+    attr_accessor right_id: Integer
+    attr_accessor cost: Integer
+    attr_accessor attrs: Array[String]
+
+    def initialize: (?surface: String surface, ?unknown: bool unknown,
+                     ?min_cost: Integer min_cost, ?min_prev: ::Suika::Node? min_prev,
+                     ?left_id: ::Integer left_id, ?right_id: ::Integer right_id,
+                     ?cost: ::Integer cost, ?attrs: Array[String] attrs) -> void
+  end
+end

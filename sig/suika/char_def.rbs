@@ -1,0 +1,25 @@
+module Suika
+  class CharDef
+    def self.char_type: (String ch) -> String
+    def self.char_category: (String ch) -> { invoke: bool, group: bool, length: Integer }
+
+    MAX_GROUPING_SIZE: Integer
+
+    private
+
+    #CHAR_CATEGORY: Hash[String, { invoke: bool, group: bool, length: Integer }]
+    CHAR_CATEGORY: Hash[String, untyped]
+    CHAR_TYPES: Array[String]
+
+    SPACE: Array[Range[Integer]]
+    NUMERIC: Array[Range[Integer]]
+    SYMBOL: Array[Range[Integer]]
+    ALPHA: Array[Range[Integer]]
+    CYRILLIC: Array[Range[Integer]]
+    GREEK: Array[Range[Integer]]
+    HIRAGANA: Array[Range[Integer]]
+    KATAKANA: Array[Range[Integer]]
+    KANJI: Array[Range[Integer]]
+    KANJINUMERIC: Array[Range[Integer]]
+  end
+end
