@@ -42,27 +42,30 @@ module Suika
       while start < terminal
         step = terminal - start
 
-        query = sentence[start..-1]
+        query = sentence[start..-1] || ''
         result = trie.common_prefix_search(query)
         unless result.empty?
           words, indices = result
-          words.each_with_index do |word, i|
-            features[indices[i]].each do |el|
-              lattice.insert(start, start + word.length, word, false, el[0], el[1], el[2], el[3..-1])
+          unless words.empty?
+            step = INT_MAX
+            words.each_with_index do |word, i|
+              features[indices[i]].each do |el|
+                lattice.insert(start, start + word.length, word, false, el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
+              end
+              step = word.length if word.length < step
             end
           end
-          step = words.map(&:size).min
         end
 
-        word = sentence[start]
-        char_cate = CharDef.char_category(sentence[start])
-        char_type = CharDef.char_type(sentence[start])
+        word = sentence[start] || ''
+        char_cate = CharDef.char_category(sentence[start] || '')
+        char_type = CharDef.char_type(sentence[start] || '')
         if char_cate[:invoke]
-          char_length = char_cate[:group] ? CharDef::MAX_GROUPING_SIZE : char_cate[:length]
-          unk_terminal = [start + char_length, terminal].min
+          unk_terminal = start + (char_cate[:group] ? CharDef::MAX_GROUPING_SIZE : char_cate[:length])
+          unk_terminal = terminal if terminal < unk_terminal
           pos = start + 1
-          while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos])
-            word << sentence[pos]
+          while pos < unk_terminal && char_type == CharDef.char_type(sentence[pos] || '')
+            word << (sentence[pos] || '')
             pos += 1
           end
         end
@@ -70,7 +73,7 @@ module Suika
           lattice.insert(start, start + word.length, word, true,
                          el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
         end
-        step = [step, word.length].min
+        step = word.length if word.length < step
 
         start += step
       end
@@ -101,7 +104,7 @@ module Suika
     end
 
     def viterbi(lattice)
-      bos = lattice.end_nodes[0].first
+      bos = lattice.end_nodes[0][0]
       bos.min_cost = 0
       bos.min_prev = nil
 
@@ -119,7 +122,7 @@ module Suika
         end
       end
 
-      eos = lattice.begin_nodes[-1].first
+      eos = lattice.begin_nodes[-1][0]
       prev_node = eos.min_prev
       res = []
       until prev_node.nil?
