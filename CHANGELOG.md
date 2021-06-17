@@ -1,3 +1,11 @@
+## 0.3.0
+
+### Changes
+- Add type declaration files.
+- Refactor to avoid assigning null to variables.
+- Fix some configuration files.
+
+
 ## 0.2.0
 
 ### Breaking Change
