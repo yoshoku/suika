@@ -1,3 +1,6 @@
+## 0.3.1
+- Fix Tagger's inspect method not to expand instance variables for object creation on irb and pry.
+
 ## 0.3.0
 
 ### Changes
