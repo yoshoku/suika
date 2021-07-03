@@ -2,6 +2,7 @@ module Suika
   class Tagger
     def initialize: () -> void
     def parse: (String sentence) -> Array[String]
+    def inspect: () -> String
 
     private
 

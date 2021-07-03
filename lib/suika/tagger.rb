@@ -81,6 +81,10 @@ module Suika
       viterbi(lattice)
     end
 
+    def inspect
+      to_s
+    end
+
     private
 
     DICTIONARY_PATH = "#{__dir__}/../../dict/sysdic.gz"

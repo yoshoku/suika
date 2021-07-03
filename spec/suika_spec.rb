@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 RSpec.describe Suika do
+  let(:tagger) { Suika::Tagger.new }
+
+  it 'does not display instance variables on inspect method' do
+    expect(tagger.inspect).not_to include('@sysdic')
+  end
+
   it 'performs morphological analysis' do
-    tagger = Suika::Tagger.new
     result = tagger.parse('すもももももももものうち')
     expect(result).to eq(
       [
