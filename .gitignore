@@ -6,10 +6,12 @@
 /pkg/
 /spec/reports/
 /tmp/
+/node_modules/
 
 # rspec failure tracking
 .rspec_status
 
+*.lock
 *.swp
 tags
 .DS_Store

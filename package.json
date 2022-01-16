@@ -1,0 +1,14 @@
+{
+  "name": "suika",
+  "repository": "git@github.com:yoshoku/suika.git",
+  "author": "Atsushi Tatsuma <yoshoku@outlook.com>",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
+    "husky": "^7.0.4"
+  }
+}
