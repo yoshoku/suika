@@ -75,7 +75,8 @@ end
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/yoshoku/suika.
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/yoshoku/suika/blob/main/CODE_OF_CONDUCT.md).
+This project is intended to be a safe, welcoming space for collaboration,
+and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -92,7 +93,3 @@ Suika is created with reference to [the book on morphological analysis](https://
 - [Tomoko Uchida](https://github.com/mocobeta) is the author of [Janome](https://github.com/mocobeta/janome) that is a Japanese morphological analysis engine written in pure Python.
 Suika is heavily influenced by Janome's idea to include the built-in dictionary and language model.
 Janome, a morphological analyzer written in scripting language, gives me the courage to develop Suika.
-
-## Code of Conduct
-
-Everyone interacting in the Suika project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/yoshoku/suika/blob/main/CODE_OF_CONDUCT.md).
