@@ -3,6 +3,7 @@
   "repository": "git@github.com:yoshoku/suika.git",
   "author": "Atsushi Tatsuma <yoshoku@outlook.com>",
   "license": "BSD-3-Clause",
+  "private": true,
   "scripts": {
     "prepare": "husky install"
   },
