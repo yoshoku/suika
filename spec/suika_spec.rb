@@ -7,7 +7,7 @@ RSpec.describe Suika do
     expect(tagger.inspect).not_to include('@sysdic')
   end
 
-  it 'performs morphological analysis' do
+  it 'performs morphological analysis', :aggregate_failures do
     result = tagger.parse('すもももももももものうち')
     expect(result).to eq(
       [
