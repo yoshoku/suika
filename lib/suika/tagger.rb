@@ -34,7 +34,7 @@ module Suika
     # Parse the given sentence.
     # @param sentence [String] Japanese text to be parsed.
     # @return [Array<String>]
-    def parse(sentence)
+    def parse(sentence) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
       lattice = Lattice.new(sentence.length)
       start = 0
       terminal = sentence.length
@@ -52,7 +52,7 @@ module Suika
               features[indices[i]].each do |el|
                 lattice.insert(start, start + word.length, word, false, el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
               end
-              step = word.length if word.length < step
+              step = word.length if word.length < step # rubocop:disable Metrics/BlockNesting
             end
           end
         end
