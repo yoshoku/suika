@@ -1,3 +1,7 @@
+## 0.3.2
+
+- Refactor codes and configs with RuboCop.
+
 ## 0.3.1
 - Fix Tagger's inspect method not to expand instance variables for object creation on irb and pry.
 
