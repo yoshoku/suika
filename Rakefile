@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 
@@ -9,10 +11,14 @@ require 'zlib'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :default => :spec
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new
+
+task default: %i[rubocop spec]
 
 desc 'Build suika system dictionary'
-task :dictionary do
+task :dictionary do # rubocop:disable Metrics/BlockLength
   base_dir = "#{__dir__}/dict/mecab-ipadic-2.7.0-20070801"
   unless File.directory?(base_dir)
     puts "Download mecab-ipadic file and expand that under dict directory:  #{__dir__}/dict/mecab-ipadic-2.7.0-20070801"
