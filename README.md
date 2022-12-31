@@ -1,7 +1,6 @@
 # Suika
 
 [![Build Status](https://github.com/yoshoku/suika/workflows/build/badge.svg)](https://github.com/yoshoku/suika/actions?query=workflow%3Abuild)
-[![Coverage Status](https://coveralls.io/repos/github/yoshoku/suika/badge.svg?branch=main)](https://coveralls.io/github/yoshoku/suika?branch=main)
 [![Gem Version](https://badge.fury.io/rb/suika.svg)](https://badge.fury.io/rb/suika)
 [![BSD 3-Clause License](https://img.shields.io/badge/License-BSD%203--Clause-orange.svg)](https://github.com/yoshoku/suika/blob/main/LICENSE.txt)
 [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://rubydoc.info/gems/suika)
