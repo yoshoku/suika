@@ -24,7 +24,7 @@ module Suika
   class Tagger
     # Create a new tagger by loading the built-in binary dictionary.
     def initialize
-      raise IOError, 'SHA1 digest of dictionary file does not match.' unless DICTIONARY_KEY == Digest::SHA1.file(DICTIONARY_PATH).to_s
+      raise IOError, 'SHA1 digest of dictionary file does not match.' unless Digest::SHA1.file(DICTIONARY_PATH).to_s == DICTIONARY_KEY
 
       @sysdic = Marshal.load(Zlib::GzipReader.open(DICTIONARY_PATH, &:read))
       @trie = DartsClone::DoubleArray.new
