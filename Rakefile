@@ -81,5 +81,5 @@ task :dictionary do # rubocop:disable Metrics/BlockLength
 
   puts 'The system dictionary has been successfully built:'
   puts "#{__dir__}/dict/sysdic.gz"
-  puts Digest::SHA1.file("#{__dir__}/dict/sysdic.gz").to_s
+  puts Digest::SHA1.file("#{__dir__}/dict/sysdic.gz")
 end
