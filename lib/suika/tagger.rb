@@ -52,7 +52,7 @@ module Suika
               features[indices[i]].each do |el|
                 lattice.insert(start, start + word.length, word, false, el[0].to_i, el[1].to_i, el[2].to_i, el[3..-1])
               end
-              step = word.length if word.length < step # rubocop:disable Metrics/BlockNesting
+              step = word.length if word.length < step
             end
           end
         end
