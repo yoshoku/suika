@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'csv', '>= 3.1.9'
   spec.add_dependency 'dartsclone', '>= 0.2.0'
+  spec.add_dependency 'nkf', '>=0.1.1'
 end
