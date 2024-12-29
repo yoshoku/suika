@@ -1,3 +1,8 @@
+## 0.3.3
+
+- Add csv and nkf gems to runtime dependencies for Ruby 3.4.
+- Refactor codes and configs with RuboCop.
+
 ## 0.3.2
 
 - Refactor codes and configs with RuboCop.
