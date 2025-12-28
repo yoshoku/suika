@@ -5,11 +5,11 @@
   "license": "BSD-3-Clause",
   "private": true,
   "scripts": {
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
-    "husky": "^7.0.4"
+    "husky": "^9.1.7"
   }
 }
